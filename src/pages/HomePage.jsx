@@ -97,19 +97,33 @@ const HomePage = () => {
           </h2>
 
           <div className="flex gap-8 items-center justify-between ">
-            <Card
+            {/* <Card
               title="Music"
               icon={<MdOutlineMusicNote />}
               image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBEWPnBFKt6uCoriY_vCfZIf07u_MUF1s3BeUCSgxhhLs5_1kGgquaB_lkT-426mnObAp4TPk0HvZtxAQr7HEBWE4_XQRjsP4hG9tzIrwCWNaQGylVnScBS0GikaD0TCukcshkpS7g6FDKR0o7-chiailajlu6WoOktCZ_vWgWz-vnBUj4XPlSq9ygOHpnAOKtMiNx6kPmsRovcgx_lzLbGwaM2p-SKZgW5UPIeW7NpesARY7yQ8MbspQ')]"
             />
 
-            
+            <Card
+              title="Technology"
+              icon={<RiCpuLine />}
+              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBc8LKgmSW7SQ4lo7_q9FHoABdC29I3HZHWI_QFYLvFKApPr2XH9vGHa5mHgYvFX5qemZkKQmAOKUyhyNRrmJ_Mdc9JAHhyIHZvCVmBxoVZaYQlu3HQcSiMomVjm8tbAGhxVBKoAkDctXypKGd4l1RAOWHAdRXr8dW35PLcuXqT94B3D0UGTTUPEyNKGSxXTdNaOYGkjOdfvEcrqROWVs5tnfUc5zbIrcswgc49ECsUpMAPQ1Wk1FB6kQ')]"
+            />
 
-            <Card />
+            <Card
+              title="Art & Culture"
+              icon={<MdOutlineMusicNote />}
+              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuD64M_SK6-bwINLMVYNWIfFBkiXMhb_-SAIMGiwk7NTOq3ApvPSYk6b01E0QaB2ISDrx8ViyF-K7g52zGETH1qiJOLSadoJuoStLo3IQbSygAxMFh2iT7BFulD8-8t-R6c8SCJqDhMaObZ08OxNBpZmFGtnukYDOYzRyyT_rEgHSNs8b3uTO-Cfgho3oL_30IVgrX_nL6Ymf8305uIj32z9oBNO4Fq1uYgz86-lMd1PrErzrO3riUS-fw')]"
+            />
 
-            <Card />
+            <Card
+              title="Food & Drinks"
+              icon={<MdOutlineMusicNote />}
+              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvb6c19VrPNBH9GqhNhdTwtOI5RXcVQ5mcQwaAPlgqMFz83NH7X6WqU_sl8aMrbCQBlc1NF23nuiUEzp--NmLMJ4R5PsJS6-094pcbS_ZXkpzmq6vFwGxMHJQ1ltWFjq8ZdEhkBnFW162ZggEtSUhu_AmZdWXsr4LqXDnWr3EMdF3CUA7P-R51eAfzXlAje28qpyTcLkgfzPzqiJM6SY40Zr-QFQqnoQTlaR41XlozQflDCEn1Vnlu-g')]"
+            /> */}
 
-            <Card />
+            {categories.map((Category) => {
+              return <Card title={Category.title} image ={Category.image} icon = {Category.icon} />;
+            })}
           </div>
         </section>
       </main>
@@ -118,35 +132,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-{
-  /* <div className=" relative h-60 w-full bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBc8LKgmSW7SQ4lo7_q9FHoABdC29I3HZHWI_QFYLvFKApPr2XH9vGHa5mHgYvFX5qemZkKQmAOKUyhyNRrmJ_Mdc9JAHhyIHZvCVmBxoVZaYQlu3HQcSiMomVjm8tbAGhxVBKoAkDctXypKGd4l1RAOWHAdRXr8dW35PLcuXqT94B3D0UGTTUPEyNKGSxXTdNaOYGkjOdfvEcrqROWVs5tnfUc5zbIrcswgc49ECsUpMAPQ1Wk1FB6kQ')] bg-cover bg-center">
-              <div className="absolute bottom-8 text-white text-4xl ">
-                <RiCpuLine />
-                <p>Technology</p>
-              </div>
-            </div>
-
-            <div className=" relative h-60 w-full bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuD64M_SK6-bwINLMVYNWIfFBkiXMhb_-SAIMGiwk7NTOq3ApvPSYk6b01E0QaB2ISDrx8ViyF-K7g52zGETH1qiJOLSadoJuoStLo3IQbSygAxMFh2iT7BFulD8-8t-R6c8SCJqDhMaObZ08OxNBpZmFGtnukYDOYzRyyT_rEgHSNs8b3uTO-Cfgho3oL_30IVgrX_nL6Ymf8305uIj32z9oBNO4Fq1uYgz86-lMd1PrErzrO3riUS-fw')] bg-cover bg-center">
-              <div className="absolute bottom-8 text-white text-4xl ">
-                <MdOutlineMusicNote />
-                <p>Art & Culture</p>
-              </div>
-            </div>
-
-            <div className=" relative h-60 w-full bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBEWPnBFKt6uCoriY_vCfZIf07u_MUF1s3BeUCSgxhhLs5_1kGgquaB_lkT-426mnObAp4TPk0HvZtxAQr7HEBWE4_XQRjsP4hG9tzIrwCWNaQGylVnScBS0GikaD0TCukcshkpS7g6FDKR0o7-chiailajlu6WoOktCZ_vWgWz-vnBUj4XPlSq9ygOHpnAOKtMiNx6kPmsRovcgx_lzLbGwaM2p-SKZgW5UPIeW7NpesARY7yQ8MbspQ')] bg-cover bg-center">
-              <div className="absolute bottom-8 text-white text-4xl ">
-                <MdOutlineMusicNote />
-                <p>Music</p>
-              </div>
-            </div> 
-            
-            
-            
-            
-              categories.map((category,index)=>{
-                <Card title={category.title}/>
-              })
-
-            }*/
-}
