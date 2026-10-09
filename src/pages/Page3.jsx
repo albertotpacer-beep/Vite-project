@@ -14,7 +14,7 @@ const Page3 = () => {
         </div>
 
         {/* Search Bar and Filters */}
-        <div className=" mb-6 flex flex-col gap-3 md:flex-row border-1 border-none rounded:lg px-4 py-2">
+        <div className=" mb-6 flex flex-col gap-3 md:flex-row border border-none rounded:lg px-4 py-2">
           <input
             type="text"
             placeholder="Search events, artists, or venues..."

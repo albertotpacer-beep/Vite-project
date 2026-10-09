@@ -7,7 +7,7 @@ const HomePage = () => {
       {/* HERO */}
       <main className="flex-1">
         <section
-          className="flex min-h-[921px] items-center justify-center bg-cover bg-center px-6 pt-20"
+          className="flex min-h-230.25 items-center justify-center bg-cover bg-center px-6 pt-20"
           style={{
             backgroundImage:
               "linear-gradient(to bottom, rgba(21,18,27,0.3), rgba(21,18,27,0.9)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6huQVm8Ae1kLvimktmYDvRSOEeUGjZJyUFKsTa8CYbK-IRdCW0iqT4GBlO2J2nkz5hv2J7khYBX4U3u6_ji2BSH-OCURkxh7Q0OQINqxX4snw63tKOIgoK7JFjdOhcbhFuFzW0wVs_NMOS_ichdi5LwanonQ0NJ-HYdq3T-gmqvIWwucS-9jDRVyXDFPptsDjBLx9BA1cDFWyUmm1b7dSqgqeJ7MIrbrD5ZYZZsVeoEO6VleyETDMSg')",
@@ -95,29 +95,7 @@ const HomePage = () => {
           </h2>
 
           <div className="flex gap-8 items-center justify-between ">
-            {/* <Card
-              title="Music"
-              icon={<MdOutlineMusicNote />}
-              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBEWPnBFKt6uCoriY_vCfZIf07u_MUF1s3BeUCSgxhhLs5_1kGgquaB_lkT-426mnObAp4TPk0HvZtxAQr7HEBWE4_XQRjsP4hG9tzIrwCWNaQGylVnScBS0GikaD0TCukcshkpS7g6FDKR0o7-chiailajlu6WoOktCZ_vWgWz-vnBUj4XPlSq9ygOHpnAOKtMiNx6kPmsRovcgx_lzLbGwaM2p-SKZgW5UPIeW7NpesARY7yQ8MbspQ')]"
-            />
-
-            <Card
-              title="Technology"
-              icon={<RiCpuLine />}
-              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBc8LKgmSW7SQ4lo7_q9FHoABdC29I3HZHWI_QFYLvFKApPr2XH9vGHa5mHgYvFX5qemZkKQmAOKUyhyNRrmJ_Mdc9JAHhyIHZvCVmBxoVZaYQlu3HQcSiMomVjm8tbAGhxVBKoAkDctXypKGd4l1RAOWHAdRXr8dW35PLcuXqT94B3D0UGTTUPEyNKGSxXTdNaOYGkjOdfvEcrqROWVs5tnfUc5zbIrcswgc49ECsUpMAPQ1Wk1FB6kQ')]"
-            />
-
-            <Card
-              title="Art & Culture"
-              icon={<MdOutlineMusicNote />}
-              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuD64M_SK6-bwINLMVYNWIfFBkiXMhb_-SAIMGiwk7NTOq3ApvPSYk6b01E0QaB2ISDrx8ViyF-K7g52zGETH1qiJOLSadoJuoStLo3IQbSygAxMFh2iT7BFulD8-8t-R6c8SCJqDhMaObZ08OxNBpZmFGtnukYDOYzRyyT_rEgHSNs8b3uTO-Cfgho3oL_30IVgrX_nL6Ymf8305uIj32z9oBNO4Fq1uYgz86-lMd1PrErzrO3riUS-fw')]"
-            />
-
-            <Card
-              title="Food & Drinks"
-              icon={<MdOutlineMusicNote />}
-              image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvb6c19VrPNBH9GqhNhdTwtOI5RXcVQ5mcQwaAPlgqMFz83NH7X6WqU_sl8aMrbCQBlc1NF23nuiUEzp--NmLMJ4R5PsJS6-094pcbS_ZXkpzmq6vFwGxMHJQ1ltWFjq8ZdEhkBnFW162ZggEtSUhu_AmZdWXsr4LqXDnWr3EMdF3CUA7P-R51eAfzXlAje28qpyTcLkgfzPzqiJM6SY40Zr-QFQqnoQTlaR41XlozQflDCEn1Vnlu-g')]"
-            /> */}
+            
 
             {categories.map((category) => {
               return (
