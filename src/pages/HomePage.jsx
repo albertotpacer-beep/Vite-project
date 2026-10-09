@@ -1,5 +1,3 @@
-import { MdOutlineMusicNote } from "react-icons/md";
-import { RiCpuLine } from "react-icons/ri";
 import Card from "../components/Card";
 import { categories } from "../constants/data";
 
@@ -121,11 +119,19 @@ const HomePage = () => {
               image="bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvb6c19VrPNBH9GqhNhdTwtOI5RXcVQ5mcQwaAPlgqMFz83NH7X6WqU_sl8aMrbCQBlc1NF23nuiUEzp--NmLMJ4R5PsJS6-094pcbS_ZXkpzmq6vFwGxMHJQ1ltWFjq8ZdEhkBnFW162ZggEtSUhu_AmZdWXsr4LqXDnWr3EMdF3CUA7P-R51eAfzXlAje28qpyTcLkgfzPzqiJM6SY40Zr-QFQqnoQTlaR41XlozQflDCEn1Vnlu-g')]"
             /> */}
 
-            {categories.map((Category) => {
-              return <Card title={Category.title} image ={Category.image} icon = {Category.icon} />;
+            {categories.map((category) => {
+              return (
+                <Card
+                  key={category.title}
+                  title={category.title}
+                  image={category.image}
+                  icon={category.icon}
+                />
+              );
             })}
           </div>
         </section>
+
       </main>
     </div>
   );
