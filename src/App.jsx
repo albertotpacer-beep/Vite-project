@@ -8,6 +8,10 @@ import Terms from "./pages/Terms";
 import About from "./pages/About";
 import Nav from "./components/Nav";
 import Footer from "./components/footer";
+import Favourites from "./pages/Favourites";
+import EventDetails from "./pages/EventDetails";
+import NotFoundPage from "./pages/NotFoundPage";
+
 
 function App() {
   return (
@@ -25,7 +29,13 @@ function App() {
 
         <Route path="/contact" element={<Contact />} />
 
-        <Route path="/page-three" element={<Page3 />} />
+        <Route path="/events" element={<Page3 />} />
+
+        <Route path="/favourites" element = {<Favourites /> } />
+
+        <Route path="/events/:id" element = {<EventDetails />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <Footer/>

@@ -5,19 +5,22 @@ const Nav = () => {
   return (
     <nav className="flex items-center justify-between px-8 py-5 bg-black">
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-[#7C3AED]">Evently</h1>
-
+        <Link
+          to={"/"}    
+        >
+          <h1 className="text-2xl font-bold text-[#7C3AED]">Evently</h1>
+        </Link>
         {/* Navigation */}
         <div className=" md:flex items-center gap-8 text-gray-300">
           <Link
-            to="/Contact" target='_blank'
+            to="/events"
             className="hover:underline decoration-2 underline-offset-8 hover:text-[#A476FF]"
           >
             Discover
           </Link>
 
           <Link
-            to="/Page-three"
+            to="/events"
             className="hover:underline decoration-2 underline-offset-8 hover:text-[#A476FF]"
           >
             Events
@@ -36,6 +39,14 @@ const Nav = () => {
           >
             About
          </Link>
+
+          <Link
+            to="/favourites"
+            className="hover:underline decoration-2 underline-offset-8 hover:text-[#A476FF]"
+          >
+            Favourites
+         </Link>
+
         </div>
 
         {/* Right side */}
