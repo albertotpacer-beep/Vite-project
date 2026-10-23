@@ -1,8 +1,18 @@
+import { useState } from "react";
 import { FiMapPin } from "react-icons/fi";
+import { HiHeart } from "react-icons/hi";
 import { MdOutlineCalendarToday } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const EventCard = (props) => {
+  const  [liked, setliked] = useState();
+
+  const clickHeart = () => {
+    if (liked == true) {
+      setliked(false);
+    } else setliked(true);
+
+  }
   return (
     <div className="w-full overflow-hidden rounded-xl border border-gray-800 bg-[#211E2D] text-white transition duration-300 hover:-translate-y-1 hover:border-[#7C3AED]">
       {/* Event Image */}
@@ -22,8 +32,9 @@ const EventCard = (props) => {
         <button
           aria-label={`Save ${props.title}`}
           className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-xl hover:bg-[#7C3AED]"
+          onClick={clickHeart}
         >
-          ♡
+         {liked ? <HiHeart fill="red"/> : <HiHeart/> }
         </button>
       </div>
 
