@@ -10,7 +10,12 @@ const EventDetails = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { favoriteIds, user, toggleFavorite, setError: setFavoriteError } = useFavorites();
+  const {
+    favoriteIds,
+    user,
+    toggleFavorite,
+    setError: setFavoriteError,
+  } = useFavorites();
   const [savingFavorite, setSavingFavorite] = useState(false);
 
   useEffect(() => {
@@ -33,7 +38,9 @@ const EventDetails = () => {
   }, [id]);
 
   const event = events.find((item) => String(item.id) === id);
-  const similarEvents = events.filter((item) => item.id !== event?.id).slice(0, 3);
+  const similarEvents = events
+    .filter((item) => item.id !== event?.id)
+    .slice(0, 3);
 
   async function handleFavorite() {
     if (!event) return;
@@ -50,7 +57,9 @@ const EventDetails = () => {
   if (loading) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-black px-6 text-white">
-        <p role="status" className="text-gray-400">Loading event...</p>
+        <p role="status" className="text-gray-400">
+          Loading event...
+        </p>
       </main>
     );
   }
@@ -59,7 +68,9 @@ const EventDetails = () => {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center bg-black px-6 text-center text-white">
         <h1 className="text-3xl font-bold">Could not load event</h1>
-        <p role="alert" className="mt-3 max-w-lg text-gray-400">{error}</p>
+        <p role="alert" className="mt-3 max-w-lg text-gray-400">
+          {error}
+        </p>
         <Link
           to="/events"
           className="mt-6 rounded-md bg-violet-600 px-5 py-3 text-sm font-semibold hover:bg-violet-500"
@@ -85,9 +96,8 @@ const EventDetails = () => {
     );
   }
 
-   return (
+  return (
     <main className="min-h-screen bg-[#100D18] text-white">
-
       {/* Hero Section */}
       <section className="relative h-90 overflow-hidden sm:h-105 md:h-125">
         <img
@@ -110,18 +120,22 @@ const EventDetails = () => {
           </div>
 
           <div className="flex flex-wrap items-end justify-between gap-4">
-          <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
-            {event.title}
-          </h1>
-          <button
-            type="button"
-            onClick={handleFavorite}
-            disabled={savingFavorite}
-            aria-pressed={favoriteIds.includes(String(event.id))}
-            className="min-h-10 rounded-md border border-white/30 bg-black/40 px-4 text-sm font-semibold hover:border-violet-300 disabled:opacity-60"
-          >
-            {favoriteIds.includes(String(event.id)) ? "Saved" : user ? "Save event" : "Sign in to save"}
-          </button>
+            <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
+              {event.title}
+            </h1>
+            <button
+              type="button"
+              onClick={handleFavorite}
+              disabled={savingFavorite}
+              aria-pressed={favoriteIds.includes(String(event.id))}
+              className="min-h-10 rounded-md border border-white/30 bg-black/40 px-4 text-sm font-semibold hover:border-violet-300 disabled:opacity-60"
+            >
+              {favoriteIds.includes(String(event.id))
+                ? "Saved"
+                : user
+                  ? "Save event"
+                  : "Sign in to save"}
+            </button>
           </div>
 
           <div className="mt-4 flex flex-wrap gap-5 text-sm text-gray-300">
@@ -133,14 +147,10 @@ const EventDetails = () => {
 
       {/* Event Information */}
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-8 sm:px-6 md:px-12 lg:grid-cols-3">
-
         {/* Left Side */}
         <div className="space-y-10 lg:col-span-2">
-
           <section>
-            <h2 className="mb-4 text-xl font-bold">
-              About This Event
-            </h2>
+            <h2 className="mb-4 text-xl font-bold">About This Event</h2>
 
             <p className="text-sm leading-7 text-gray-400">
               {event.description}
@@ -155,9 +165,7 @@ const EventDetails = () => {
 
           {/* Event Highlights */}
           <section>
-            <h2 className="mb-5 text-xl font-bold">
-              Event Highlights
-            </h2>
+            <h2 className="mb-5 text-xl font-bold">Event Highlights</h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {(event.tags ?? []).map((tag, index) => (
@@ -166,12 +174,14 @@ const EventDetails = () => {
                   className="rounded-xl border border-white/10 bg-[#1B1726] p-5"
                 >
                   <h3 className="font-semibold">
-                    {[
-                      "Discover Something New",
-                      "Explore the Experience",
-                      "Connect with Others",
-                      "Enjoy the Atmosphere",
-                    ][index % 4]}
+                    {
+                      [
+                        "Discover Something New",
+                        "Explore the Experience",
+                        "Connect with Others",
+                        "Enjoy the Atmosphere",
+                      ][index % 4]
+                    }
                   </h3>
 
                   <p className="mt-2 text-sm text-gray-400">
@@ -184,34 +194,25 @@ const EventDetails = () => {
 
           {/* Organiser */}
           <section className="rounded-xl border border-white/10 bg-[#1B1726] p-5">
-            <p className="text-xs text-gray-400">
-              Organised by
-            </p>
+            <p className="text-xs text-gray-400">Organised by</p>
 
-            <h3 className="mt-2 text-lg font-bold">
-              {event.organizer}
-            </h3>
+            <h3 className="mt-2 text-lg font-bold">{event.organizer}</h3>
 
             <p className="mt-2 text-sm text-gray-400">
               {event.attendees.toLocaleString()} expected attendees
             </p>
           </section>
-
         </div>
 
         {/* Right Side: Ticket Card */}
         <aside className="h-fit rounded-2xl border border-white/10 bg-[#1B1726] p-5 lg:sticky lg:top-6">
-
-          <p className="text-sm text-gray-400">
-            Starting from
-          </p>
+          <p className="text-sm text-gray-400">Starting from</p>
 
           <h2 className="mt-1 text-3xl font-extrabold text-purple-400">
             {event.price}
           </h2>
 
           <div className="mt-5 space-y-3">
-
             <div className="rounded-lg bg-[#100D18] p-4">
               <p className="text-xs text-gray-500">Date and time</p>
               <p className="mt-2 text-sm">{event.date}</p>
@@ -221,14 +222,12 @@ const EventDetails = () => {
               <p className="text-xs text-gray-500">Location</p>
               <p className="mt-2 text-sm">{event.location}</p>
             </div>
-
           </div>
 
           <p className="mt-3 text-center text-xs text-gray-500">
             Contact the event organizer for ticket availability and booking.
           </p>
         </aside>
-
       </div>
 
       {/* Similar Events */}
@@ -258,33 +257,24 @@ const EventDetails = () => {
               />
 
               <div className="p-4">
-                <p className="text-xs text-purple-400">
-                  {event.category}
-                </p>
+                <p className="text-xs text-purple-400">{event.category}</p>
 
-                <h3 className="mt-2 font-semibold">
-                  {event.title}
-                </h3>
+                <h3 className="mt-2 font-semibold">{event.title}</h3>
 
                 <p className="mt-2 text-xs text-gray-400">
                   📍 {event.location}
                 </p>
 
                 <div className="mt-4 flex justify-between">
-                  <span className="text-sm font-semibold">
-                    {event.price}
-                  </span>
+                  <span className="text-sm font-semibold">{event.price}</span>
 
-                  <span className="text-xs text-purple-400">
-                    Details →
-                  </span>
+                  <span className="text-xs text-purple-400">Details →</span>
                 </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
-
     </main>
   );
 };
