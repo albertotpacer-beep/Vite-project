@@ -17,7 +17,7 @@ const Nav = () => {
         </Link>
 
         {/* Keep the full navigation row for tablet and desktop widths. */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-5 lg:flex xl:gap-8">
           <div className="flex items-center gap-8">
             <Link to="/events" className="hover:text-[#A476FF]">
               Discover
@@ -37,12 +37,12 @@ const Nav = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <button type="button" aria-label="Favourites" className="text-xl">
+            <Link to="/favourites" aria-label="Favourites" className="text-xl hover:text-violet-300">
               ♡
-            </button>
-            <button type="button" aria-label="Search" className="text-4xl">
+            </Link>
+            <Link to="/events" aria-label="Browse events" className="text-4xl hover:text-violet-300">
               ⌕
-            </button>
+            </Link>
             <Link
               to="/events"
               className="rounded-full bg-purple-500 px-6 py-3 font-semibold text-white hover:bg-purple-400"
@@ -59,7 +59,7 @@ const Nav = () => {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
-          className="flex h-10 w-10 items-center justify-center rounded-md text-2xl hover:bg-white/10 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md text-2xl hover:bg-white/10 lg:hidden"
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -69,7 +69,7 @@ const Nav = () => {
       {menuOpen && (
         <div
           id="mobile-navigation"
-          className="absolute inset-x-0 top-full z-50 border-t border-white/10 bg-black px-4 pb-5 pt-3 shadow-xl md:hidden"
+          className="absolute inset-x-0 top-full z-50 border-t border-white/10 bg-black px-4 pb-5 pt-3 shadow-xl lg:hidden"
         >
           <div className="flex flex-col">
             <Link to="/events" onClick={closeMenu} className="py-3 hover:text-[#A476FF]">

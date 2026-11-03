@@ -1,11 +1,74 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { events } from "../constants/dataEvent";
+import { useNavigate, useParams } from "react-router-dom";
+import { useFavorites } from "../context/useFavorites";
+import { fetchEvents } from "../services/events";
 
 const EventDetails = () => {
   const { id } = useParams();
-  const event = events.find((item) => item.id === Number(id));
+  const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const { favoriteIds, user, toggleFavorite, setError: setFavoriteError } = useFavorites();
+  const [savingFavorite, setSavingFavorite] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    fetchEvents()
+      .then((data) => {
+        if (active) setEvents(data);
+      })
+      .catch((loadError) => {
+        if (active) setError(loadError.message);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  const event = events.find((item) => String(item.id) === id);
   const similarEvents = events.filter((item) => item.id !== event?.id).slice(0, 3);
+
+  async function handleFavorite() {
+    if (!event) return;
+    if (!user) {
+      navigate("/favourites");
+      return;
+    }
+    setSavingFavorite(true);
+    const result = await toggleFavorite(event.id);
+    setFavoriteError(result.error);
+    setSavingFavorite(false);
+  }
+
+  if (loading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-black px-6 text-white">
+        <p role="status" className="text-gray-400">Loading event...</p>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center bg-black px-6 text-center text-white">
+        <h1 className="text-3xl font-bold">Could not load event</h1>
+        <p role="alert" className="mt-3 max-w-lg text-gray-400">{error}</p>
+        <Link
+          to="/events"
+          className="mt-6 rounded-md bg-violet-600 px-5 py-3 text-sm font-semibold hover:bg-violet-500"
+        >
+          Browse events
+        </Link>
+      </main>
+    );
+  }
 
   if (!event) {
     return (
@@ -26,16 +89,16 @@ const EventDetails = () => {
     <main className="min-h-screen bg-[#100D18] text-white">
 
       {/* Hero Section */}
-      <section className="relative h-[420px] overflow-hidden md:h-[500px]">
+      <section className="relative h-90 overflow-hidden sm:h-105 md:h-125">
         <img
           src={event.image}
           alt={event.title}
           className="h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#100D18] via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#100D18] via-black/40 to-black/10" />
 
-        <div className="absolute bottom-10 left-6 right-6 md:left-12">
+        <div className="absolute bottom-7 left-4 right-4 sm:bottom-10 sm:left-6 sm:right-6 md:left-12">
           <div className="mb-3 flex gap-2">
             <span className="rounded-full bg-purple-600 px-3 py-1 text-xs">
               {event.category}
@@ -46,9 +109,20 @@ const EventDetails = () => {
             </span>
           </div>
 
-          <h1 className="text-3xl font-extrabold md:text-5xl">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+          <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
             {event.title}
           </h1>
+          <button
+            type="button"
+            onClick={handleFavorite}
+            disabled={savingFavorite}
+            aria-pressed={favoriteIds.includes(String(event.id))}
+            className="min-h-10 rounded-md border border-white/30 bg-black/40 px-4 text-sm font-semibold hover:border-violet-300 disabled:opacity-60"
+          >
+            {favoriteIds.includes(String(event.id)) ? "Saved" : user ? "Save event" : "Sign in to save"}
+          </button>
+          </div>
 
           <div className="mt-4 flex flex-wrap gap-5 text-sm text-gray-300">
             <p>📅 {event.date}</p>
@@ -58,7 +132,7 @@ const EventDetails = () => {
       </section>
 
       {/* Event Information */}
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-8 md:px-12 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-8 sm:px-6 md:px-12 lg:grid-cols-3">
 
         {/* Left Side */}
         <div className="space-y-10 lg:col-span-2">
@@ -72,9 +146,11 @@ const EventDetails = () => {
               {event.description}
             </p>
 
-            <p className="text-sm leading-7 text-gray-400 py-1">
+            {event.description2 && (
+              <p className="py-1 text-sm leading-7 text-gray-400">
                 {event.description2}
-             </p>   
+              </p>
+            )}
           </section>
 
           {/* Event Highlights */}
@@ -84,7 +160,7 @@ const EventDetails = () => {
             </h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {event.tags.map((tag, index) => (
+              {(event.tags ?? []).map((tag, index) => (
                 <div
                   key={tag}
                   className="rounded-xl border border-white/10 bg-[#1B1726] p-5"
@@ -148,22 +224,15 @@ const EventDetails = () => {
 
           </div>
 
-          <button
-            onClick={() => alert("Booking functionality coming soon!")}
-            className="mt-5 w-full rounded-lg bg-purple-600 py-3 font-semibold transition hover:bg-purple-700"
-          >
-            Get Tickets
-          </button>
-
           <p className="mt-3 text-center text-xs text-gray-500">
-            Check event details before booking.
+            Contact the event organizer for ticket availability and booking.
           </p>
         </aside>
 
       </div>
 
       {/* Similar Events */}
-      <section className="mx-auto max-w-7xl px-6 py-8 md:px-12">
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:px-12">
         <div className="mb-5 flex items-center justify-between">
           <h2 className="text-xl font-bold">Similar Events</h2>
 

@@ -11,11 +11,14 @@ import Footer from "./components/footer";
 import Favourites from "./pages/Favourites";
 import EventDetails from "./pages/EventDetails";
 import NotFoundPage from "./pages/NotFoundPage";
+import SupabaseConnectionTest from "./components/SupabaseConnectionTest";
+import Categories from "./pages/Categories";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 
 function App() {
   return (
-    <>
+    <FavoritesProvider>
       <Nav />
 
       <Routes>
@@ -29,17 +32,21 @@ function App() {
 
         <Route path="/contact" element={<Contact />} />
 
+        <Route path="/categories" element={<Categories />} />
+
         <Route path="/events" element={<Page3 />} />
 
         <Route path="/favourites" element = {<Favourites /> } />
 
         <Route path="/events/:id" element = {<EventDetails />} />
 
+        <Route path="/supabase-test" element={<SupabaseConnectionTest />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <Footer/>
-    </>
+    </FavoritesProvider>
   );
 }
 
